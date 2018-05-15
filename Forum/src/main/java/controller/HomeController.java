@@ -12,4 +12,14 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping(value = "/reg", method = RequestMethod.GET)
+	public String reg() {
+		return "reg";
+	}
 }
