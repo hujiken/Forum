@@ -44,10 +44,7 @@ public class LoginController {
 			model.addAttribute("username", login.getUsername());
 			return "success";
 		} else {
-			FieldError emailError = new FieldError(DatabaseKey.ACCOUNT, DatabaseKey.Account.USER_NAME, 
-					messageSource.getMessage("invalid.account.username", new String[] {}, Locale.getDefault()));
-			result.addError(emailError);
-			System.out.println(result.toString());
+			model.addAttribute("invalid", "Invalid information");
 			return "login";
 		}
 	}

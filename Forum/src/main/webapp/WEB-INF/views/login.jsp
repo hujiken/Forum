@@ -31,7 +31,11 @@
                 <td><form:errors path="password" cssClass="error"/></td>
             </tr>
             <tr>
-            	<td><input type="submit" value="Register"/></td>
+            	<td><input type="submit" value="Login"/></td>
+            </tr>
+            <tr>
+            	<td></td>
+            	<td><a>${invalid }</a></td>
             </tr>
             <tr>
                 <td colspan="2">Yet Not Registered!! <a href="/Forum/reg">Register Here</a></td>
