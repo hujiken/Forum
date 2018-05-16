@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,7 +25,7 @@ public class Account {
 	private String username;
 	
 	@Email
-	@NotNull
+	@NotEmpty
 	@Column(name = "email", nullable = false)
 	private String email;
 	
