@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.AccountDao;
+import dto.Login;
 import entity.Account;
 
 @Service("accountService")
@@ -66,6 +67,11 @@ public class AccountServiceImpl implements AccountService {
 	public boolean isAccountEmailExists(String email) {
 		Account account = findAccountByEmail(email);
 		return (account != null);
+	}
+
+	@Override
+	public boolean validateLogin(Login login) {
+		return accountDao.findAccountByUsernameAndPassword(login.getUsername(), login.getPassword()) != null;
 	}
 
 	

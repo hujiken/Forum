@@ -17,4 +17,6 @@ public interface AccountDao {
 	public Account findAccountByUsername(String username);
 	
 	public Account findAccountByEmail(String email);
+	
+	public Account findAccountByUsernameAndPassword(String username, String password);
 }

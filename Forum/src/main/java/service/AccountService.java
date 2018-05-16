@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import dto.Login;
 import entity.Account;
 
 public interface AccountService {
@@ -23,4 +24,6 @@ public interface AccountService {
 	public boolean isAccountUserNameExists(String username);
 	
 	public boolean isAccountEmailExists(String email);
+	
+	public boolean validateLogin(Login login);
 } 

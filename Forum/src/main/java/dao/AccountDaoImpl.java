@@ -52,4 +52,12 @@ public class AccountDaoImpl extends AbstractDao<Integer, Account> implements Acc
 		return (Account) criteria.uniqueResult();
 	}
 
+	@Override
+	public Account findAccountByUsernameAndPassword(String username, String password) {
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq(DatabaseKey.Account.USER_NAME, username));
+		criteria.add(Restrictions.eq(DatabaseKey.Account.PASSWORD, password));
+		return (Account) criteria.uniqueResult();
+	}
+
 }
