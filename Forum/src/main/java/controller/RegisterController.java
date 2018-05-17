@@ -13,7 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import entity.Account;
+import dto.Register;
 import service.AccountService;
 import util.constant.DatabaseKey;
 
@@ -28,36 +28,36 @@ public class RegisterController {
 	
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
 	public String newAccount(ModelMap model) {
-		Account account = new Account();
-		model.addAttribute(DatabaseKey.ACCOUNT, account);
+		Register register = new Register();
+		model.addAttribute("register", register);
 		return "reg";
 	}
 	
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String saveAcount(@Valid Account account, BindingResult result, ModelMap model) {
-		System.out.println(account.toString());
+	public String saveAcount(@Valid Register register, BindingResult result, ModelMap model) {
+		System.out.println(register.toString());
 		if (result.hasErrors()) {
 			System.out.println(result.toString());
 			return "reg";
 		}
 		
-		if (accountService.isAccountUserNameExists(account.getUsername())) {
+		if (accountService.isAccountUserNameExists(register.getUserName())) {
 			FieldError userNameError = new FieldError(DatabaseKey.ACCOUNT, DatabaseKey.Account.USER_NAME, 
-					messageSource.getMessage("exist.account.username", new String[] {account.getUsername()}, Locale.getDefault()));
+					messageSource.getMessage("exist.register.userName", new String[] {register.getUserName()}, Locale.getDefault()));
 			result.addError(userNameError);
 			return "reg";
 		}
 		
-		if (accountService.isAccountEmailExists(account.getEmail())) {
+		if (accountService.isAccountEmailExists(register.getEmail())) {
 			FieldError emailError = new FieldError(DatabaseKey.ACCOUNT, DatabaseKey.Account.EMAIL, 
-					messageSource.getMessage("exist.account.email", new String[] {account.getEmail()}, Locale.getDefault()));
+					messageSource.getMessage("exist.register.email", new String[] {register.getEmail()}, Locale.getDefault()));
 			result.addError(emailError);
 			return "reg";
 		}
 		
-		accountService.saveAccount(account);
-		model.addAttribute(DatabaseKey.Account.USER_NAME, account.getUsername());
-		model.addAttribute(DatabaseKey.Account.EMAIL, account.getEmail());
+		accountService.saveAccount(register.convertToAccount());
+		model.addAttribute(DatabaseKey.Account.USER_NAME, register.getUserName());
+		model.addAttribute(DatabaseKey.Account.EMAIL, register.getEmail());
 		return "success";
 	}
 }

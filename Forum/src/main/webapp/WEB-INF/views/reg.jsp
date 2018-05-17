@@ -21,13 +21,12 @@
  
     <h2>Registration</h2>
   
-    <form:form method="POST" modelAttribute="account">
-        <form:input type="hidden" path="id" id="id"/>
+    <form:form method="POST" modelAttribute="register">
         <table>
             <tr>
-                <td><label for="username">User name: </label> </td>
-                <td><form:input path="username" id="username"/></td>
-                <td><form:errors path="username" cssClass="error"/></td>
+                <td><label for="userName">User name: </label> </td>
+                <td><form:input path="userName" id="userName"/></td>
+                <td><form:errors path="userName" cssClass="error"/></td>
             </tr>
          
             <tr>

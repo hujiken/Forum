@@ -29,10 +29,10 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void updateAccount(Account account) {
-		Account entity = accountDao.findById(account.getId());
+		Account entity = accountDao.findById(account.getAccountId());
 		if (entity != null) {
 			entity.setEmail(account.getEmail());
-			entity.setUsername(account.getUsername());
+			entity.setUserName(account.getUserName());
 			entity.setPassword(account.getPassword());
 		}
 	}

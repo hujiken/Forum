@@ -42,6 +42,8 @@ public class AccountDaoImpl extends AbstractDao<Integer, Account> implements Acc
 	public Account findAccountByUsername(String username) {
 		Criteria criteria = createEntityCriteria();
 		criteria.add(Restrictions.eq(DatabaseKey.Account.USER_NAME, username));
+		System.out.println(criteria.toString());
+		System.out.println(criteria.uniqueResult());
 		return (Account) criteria.uniqueResult();
 	}
 

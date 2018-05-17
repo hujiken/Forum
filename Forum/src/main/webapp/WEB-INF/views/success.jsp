@@ -12,6 +12,6 @@
 </head>
 <body>
 	<h1>Register Success!</h1>
-	<a class="uname">${username}</a>, welcome to Forum.
+	<a class="uname">${userName}</a>, welcome to Forum.
 </body>
 </html>

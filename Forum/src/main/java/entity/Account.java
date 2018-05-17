@@ -1,53 +1,54 @@
 package entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="account")
 public class Account {
 	
 	@Id
+	@Column(name = "account_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int accountId;
 	
-	@Size(min = 5, max = 50)
-	@NotNull
-	@Column(name = "username", nullable = false)
-	private String username;
+	@Column(name = "user_name", nullable = false)
+	private String userName;
 	
-	@Email
-	@NotEmpty
 	@Column(name = "email", nullable = false)
 	private String email;
 	
-	@Size(min = 5, max = 50)
-	@NotNull
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	public int getId() {
-		return id;
+	@Column(name = "role")
+	private int role;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Profile profile;
+
+	public int getAccountId() {
+		return accountId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
 
 	public String getEmail() {
@@ -66,9 +67,26 @@ public class Account {
 		this.password = password;
 	}
 
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+		return "Account [accountId=" + accountId + ", username=" + userName + ", email=" + email + ", password="
+				+ password + ", role=" + role + "]";
 	}
 	
 }
