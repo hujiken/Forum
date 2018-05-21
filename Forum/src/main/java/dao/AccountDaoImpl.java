@@ -26,8 +26,8 @@ public class AccountDaoImpl extends AbstractDao<Integer, Account> implements Acc
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	@Override
 	public void deleteAccountByUsername(String username) {
-		Query query = getSession().createSQLQuery("delete from Account where username = :username");
-		query.setString(username, username);
+		Query query = getSession().createSQLQuery("delete from account where user_name = :username");
+		query.setString("username", username);
 		query.executeUpdate();
 	}
 
