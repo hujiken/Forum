@@ -4,10 +4,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import entity.Account;
 
 public class Register {
-	
+	@JsonProperty(value="user_name")
 	@Size(min = 5, max = 50)
 	private String userName;
 	
@@ -48,6 +50,11 @@ public class Register {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Register [userName=" + userName + ", email=" + email + ", password=" + password + "]";
 	}
 	
 	

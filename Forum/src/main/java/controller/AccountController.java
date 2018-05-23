@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -44,7 +46,8 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public ResponseEntity<Void>createAccount(@RequestBody Register register, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Void>createAccount(@Valid @RequestBody Register register, UriComponentsBuilder ucBuilder) {
+		System.out.println("LA SAO: " + register.toString());
 		if (accountService.isAccountUserNameExists(register.getUserName()) 
 				|| accountService.isAccountEmailExists(register.getEmail())) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
