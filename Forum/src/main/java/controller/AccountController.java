@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,7 +28,7 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@RequestMapping(value = "/list-all", method = RequestMethod.GET)
+	@GetMapping(value = "/list-all", consumes="application/json")
 	public ResponseEntity<List<Account>>listAllAccounts() {
 		List<Account> listAccounts = accountService.findAllAccount();
 		if (listAccounts.isEmpty()) {
@@ -36,7 +39,7 @@ public class AccountController {
 		
 	}
 	
-	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/account/{id}", consumes="application/json")
 	public ResponseEntity<Account>getAccount(@PathVariable("id") Integer id) {
 		Account account = accountService.findById(id);
 		if (account == null) {
@@ -45,9 +48,11 @@ public class AccountController {
 		return new ResponseEntity<Account>(account, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public ResponseEntity<Void>createAccount(@Valid @RequestBody Register register, UriComponentsBuilder ucBuilder) {
-		System.out.println("LA SAO: " + register.toString());
+	@PostMapping(value = "/account", consumes="application/json")
+	public ResponseEntity<Void>createAccount(@Valid @RequestBody Register register, UriComponentsBuilder ucBuilder, BindingResult result) {
+		if (result.hasErrors()) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
 		if (accountService.isAccountUserNameExists(register.getUserName()) 
 				|| accountService.isAccountEmailExists(register.getEmail())) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -60,7 +65,7 @@ public class AccountController {
 		
 	}
 	
-	@RequestMapping(value = "/account/{id}", method = RequestMethod.PUT)
+	@PutMapping(value = "/account/{id}")
 	public ResponseEntity<Account>updateAccount(@PathVariable ("id") Integer id, @RequestBody Register register) {
 		
 		Account account = accountService.findById(id);
@@ -84,7 +89,7 @@ public class AccountController {
 		return new ResponseEntity<Account>(account, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/account/{id}")
 	public ResponseEntity<Account>deleteAccount(@PathVariable ("id") Integer id) {
 		
 		Account account = accountService.findById(id);
@@ -94,6 +99,11 @@ public class AccountController {
 		}
 		
 		accountService.deleteAccountByUsername(account.getUserName());
-		return new ResponseEntity<Account>(HttpStatus.OK);
+		return new ResponseEntity<Account>(HttpStatus.NO_CONTENT);
+	}
+	
+	@GetMapping(value = "/access-denied")
+	public String accessDenied() {
+		return "access_denied1";
 	}
 }

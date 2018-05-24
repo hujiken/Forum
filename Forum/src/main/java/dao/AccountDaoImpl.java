@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import entity.Account;
 import util.constant.DatabaseKey;
 
+@SuppressWarnings("deprecation")
 @Repository("accountDao")
 public class AccountDaoImpl extends AbstractDao<Integer, Account> implements AccountDao {
 
@@ -23,7 +24,7 @@ public class AccountDaoImpl extends AbstractDao<Integer, Account> implements Acc
 		persist(account);
 	}
 
-	@SuppressWarnings({ "deprecation", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public void deleteAccountByUsername(String username) {
 		Query query = getSession().createSQLQuery("delete from account where user_name = :username");

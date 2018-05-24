@@ -104,7 +104,20 @@
 	    <version>6.0.7.Final</version>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<!-- Security -->
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-web</artifactId>
+	    <version>4.2.3.RELEASE</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>4.2.3.RELEASE</version>
+	</dependency>
+		
+	<!-- Jackson-databind -->
 	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
