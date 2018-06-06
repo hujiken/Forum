@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<strong>${ user }</strong> Access Denied!
+	<strong>${ user }</strong>, You are admin
 	<a href="/Forum/logout">Logout</a>
 </body>
 </html>

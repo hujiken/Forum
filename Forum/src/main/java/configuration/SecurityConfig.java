@@ -22,9 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/", "/home").permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/god/**").hasRole("GOD")
-			.and().formLogin().loginPage("/login").and().exceptionHandling().accessDeniedPage("/access-denied");
+			.antMatchers("/admin/**").access("hasRole('ADMIN')")
+			.antMatchers("/god/**").access("hasRole('GOD')")
+			.and().formLogin().and().exceptionHandling().accessDeniedPage("/access-denied");
 	}
 	
 }
